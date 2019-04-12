@@ -3,6 +3,8 @@ import '../stylesheets/LoginPage.css';
 import { Button, Form } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { getAuthToken } from '../backend'
+import { withRouter } from 'react-router-dom'
+
 
 
 
@@ -60,4 +62,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login 
+export default withRouter(Login) 
