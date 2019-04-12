@@ -2,6 +2,8 @@ import React from 'react'
 import '../stylesheets/LoginPage.css';
 import { Button, Form } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { getAuthToken } from '../backend'
+
 
 
 
@@ -22,6 +24,16 @@ class Login extends React.Component {
 
     handleSubmit = (event, { value }) => {
         event.preventDefault()
+        getAuthToken(this.state).then(payload => {
+            localStorage.setItem('token', payload.token)
+            localStorage.setItem('username', payload.user)
+            localStorage.setItem('userId', payload.userId)
+            if (localStorage.getItem('token') && localStorage.getItem('username') !== 'undefined') {
+                this.props.history.push('/home')
+            } else {
+                prompt('Please Try Again')
+            }
+        })
     }
 
     render() {
@@ -46,9 +58,6 @@ class Login extends React.Component {
             </div>
         )
     }
-
-
-
 }
 
 export default Login 
