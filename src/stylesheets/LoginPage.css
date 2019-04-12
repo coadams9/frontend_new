@@ -1,0 +1,42 @@
+#title{
+   color: azure;
+   font-family: 'Dancing Script', cursive;
+   font-size: 10em
+}
+
+#loginContainer {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   font-size: -webkit-xxx-large;
+   height: 20em;
+   justify-content: center;
+   text-align: center;
+}
+
+.ui.form {
+   font-size: 1rem;
+   border-style: groove;
+   border-width: thick;
+   border-color: black;
+   box-shadow: inset 0px 20px 20px 20px black;
+   border-radius: 1em;
+   padding: 1em;
+   padding-bottom: 4em;
+}
+
+#input {
+   border-radius: 2em;
+   text-align: -webkit-center;
+}
+
+.ui.form .field>label {
+   display: block;
+   margin: 0 0 .28571429rem 0;
+   color: azure;
+   font-size: 34px;
+   font-weight: 700;
+   text-transform: none;
+   font-family: 'Dancing Script', cursive;
+}
+
