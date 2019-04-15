@@ -1,8 +1,8 @@
 import React from 'react'
-import '../stylesheets/LoginPage.css';
+import '../stylesheets/LoginAndSignUp.css';
 import { Button, Form } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import { getAuthToken } from '../backend'
+import { getAuthToken } from '../actions/backend'
 import { withRouter } from 'react-router-dom'
 
 
@@ -33,7 +33,7 @@ class Login extends React.Component {
             if (localStorage.getItem('token') && localStorage.getItem('username') !== 'undefined') {
                 this.props.history.push('/home')
             } else {
-                prompt('Please Try Again')
+                alert('Please Try Again')
             }
         })
     }
