@@ -1,1 +1,1 @@
-work on rendering specific errors from backend. first noticed in Signup.js 
+work on rendering specific errors from backend. first noticed in Signup.js specifically if a function fails for whatever reason I need the program to stop and tell me/the user.

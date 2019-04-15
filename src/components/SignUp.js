@@ -52,10 +52,10 @@ class SignUp extends React.Component {
    handleSubmit = (event, { value }) => {
       event.preventDefault()
       const { username, password, passwordConfirm, phoneNum } = this.state
-
+      debugger
       if (password === passwordConfirm) {
          newUser(username, password, phoneNum)
-         this.loginUser()
+         // this.loginUser()
          this.props.history.push('/home')
       } else {
          alert('Your passwords...equal, they are not..')
@@ -91,7 +91,7 @@ class SignUp extends React.Component {
                   <input id='input' placeholder='Enter Password' type='password' value={passwordConfirm}
                      onChange={this.getPasswordConfirm()} />
                </Form.Field>
-               <Button inverted color='red' type='submit' as={Link} to='/login'>SignUp & Login</Button>
+               <Button inverted color='red'>SignUp & Login</Button>
             </Form>
          </div>
       )
