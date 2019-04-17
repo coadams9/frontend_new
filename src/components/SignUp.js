@@ -55,7 +55,7 @@ class SignUp extends React.Component {
       debugger
       if (password === passwordConfirm) {
          newUser(username, password, phoneNum)
-         // this.loginUser()
+         this.loginUser()
          this.props.history.push('/home')
       } else {
          alert('Your passwords...equal, they are not..')
@@ -92,6 +92,7 @@ class SignUp extends React.Component {
                      onChange={this.getPasswordConfirm()} />
                </Form.Field>
                <Button inverted color='red'>SignUp & Login</Button>
+               <Button inverted color='red' as={Link} to='/login'> To Login</Button>
             </Form>
          </div>
       )
