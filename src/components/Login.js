@@ -27,7 +27,6 @@ class Login extends React.Component {
     handleSubmit = (event, { value }) => {
         event.preventDefault()
         getAuthToken(this.state).then(payload => {
-            debugger
             localStorage.setItem('token', payload.token)
             localStorage.setItem('username', payload.username)
             if (localStorage.getItem('token') && localStorage.getItem('username') !== 'undefined') {

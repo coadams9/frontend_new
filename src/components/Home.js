@@ -1,8 +1,8 @@
 import React from 'react'
 import NavBar from './NavBar'
-import '../stylesheets/HomePage.css'
+import '../stylesheets/Home_Fav.css'
 // import { withRouter } from 'react-router-dom'
-import { Image, Card, Icon } from 'semantic-ui-react'
+import { Image, Card, Icon, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 
@@ -11,20 +11,29 @@ import { connect } from 'react-redux'
 
 class Home extends React.Component {
 
-   componentDidMount() {
+
+   componentWillMount() {
       fetch('http://localhost:3000/api/v1/cars')
          .then(res => res.json())
          .then(data => this.props.carsToStore(data))
+
+      fetch('http://localhost:3000/api/v1/cars')
+         .then(res => res.json())
+         .then(data => {
+            let car = data.filter(car => car.favorite === true)
+            this.props.favToStore(car)
+         })
    }
 
    image() {
       return 'https://i1.wp.com/empiremotorworld.com.my/wp-content/uploads/2017/10/car-banner1.jpg?ssl=1'
    }
 
+
    carCards = () => {
       const allCars = this.props.cars
       return allCars.map(car => {
-         return <Card>
+         return <Card key={car.id}>
             <Image src={car.image} />
             <Card.Content>
                <Card.Header>{car.make}</Card.Header>
@@ -37,7 +46,10 @@ class Home extends React.Component {
             <Card.Content>
                <p>Owner: {car.users[0].username}</p>
                <p>Contact: {car.users[0].phoneNum}</p>
-               <Icon size='big' color='red' onClick={() => this.favToStore(car)} name={this.state.favs.includes(car) ? "heart" : "heart outline"} />
+               <Button circular icon size='big' color='red' onClick={() => this.props.favToStore(car)}>
+                  <Icon name='heart' />
+                  Favorite
+               </Button>
             </Card.Content>
          </Card>
       })
@@ -66,8 +78,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
    return {
-      cars: state.cars.allCars,
-      favs: state.cars.favs
+      cars: state.cars.allCars
    }
 }
 

@@ -1,6 +1,6 @@
 const initialState = {
    allCars: null,
-   favs: null
+   favs: []
 }
 
 
