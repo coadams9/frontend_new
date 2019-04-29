@@ -6,7 +6,6 @@ import { Image, Card, Icon, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 
-// let newArr = cars.filter(car => car.make.toLowerCase().includes(searchTerm.toLowerCase()) || car.modelMake.toLowerCase().includes(searchTerm.toLowerCase()) || car.year.toLowerCase().includes(searchTerm.toLowerCase()) || car.color.toLowerCase().includes(searchTerm.toLowerCase()) || car.price.toLowerCase().includes(searchTerm.toLowerCase()))
 
 
 
@@ -34,51 +33,27 @@ class Home extends React.Component {
    carCards = () => {
       const filtered = this.props.filtered
       const allCars = this.props.cars
-      if (filtered !== true) {
-         return allCars.map(car => {
-            return <Card key={car.id}>
-               <Image src={car.image} />
-               <Card.Content>
-                  <Card.Header>{car.make}</Card.Header>
-                  <p>Price: {car.price}</p>
-                  <p>Model: {car.modelMake}</p>
-                  <p>Year: {car.year}</p>
-                  <p>Color: {car.color}</p>
-                  <p>Description: {car.description}</p>
-               </Card.Content>
-               <Card.Content>
-                  <p>Owner: {car.users[0].username}</p>
-                  <p>Contact: {car.users[0].phoneNum}</p>
-                  <Button circular icon size='big' color='red' onClick={() => this.props.favToStore(car)}>
-                     <Icon name='heart' />
-                     Favorite
+      return allCars.map(car => {
+         return <Card key={car.id}>
+            <Image src={car.image} />
+            <Card.Content>
+               <Card.Header>{car.make}</Card.Header>
+               <p>Price: {car.price}</p>
+               <p>Model: {car.modelMake}</p>
+               <p>Year: {car.year}</p>
+               <p>Color: {car.color}</p>
+               <p>Description: {car.description}</p>
+            </Card.Content>
+            <Card.Content>
+               <p>Owner: {car.users[0].username}</p>
+               <p>Contact: {car.users[0].phoneNum}</p>
+               <Button circular icon size='big' color='red' onClick={() => this.props.favToStore(car)}>
+                  <Icon name='heart' />
+                  Favorite
                   </Button>
-               </Card.Content>
-            </Card>
-         })
-      } else {
-         return filtered.map(car => {
-            return <Card key={car.id}>
-               <Image src={car.image} />
-               <Card.Content>
-                  <Card.Header>{car.make}</Card.Header>
-                  <p>Price: {car.price}</p>
-                  <p>Model: {car.modelMake}</p>
-                  <p>Year: {car.year}</p>
-                  <p>Color: {car.color}</p>
-                  <p>Description: {car.description}</p>
-               </Card.Content>
-               <Card.Content>
-                  <p>Owner: {car.users[0].username}</p>
-                  <p>Contact: {car.users[0].phoneNum}</p>
-                  <Button circular icon size='big' color='red' onClick={() => this.props.favToStore(car)}>
-                     <Icon name='heart' />
-                     Favorite
-                  </Button>
-               </Card.Content>
-            </Card>
-         })
-      }
+            </Card.Content>
+         </Card>
+      })
    }
 
    render() {
