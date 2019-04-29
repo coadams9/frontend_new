@@ -7,8 +7,8 @@
       {
          "type": "chrome",
          "request": "launch",
-         "name": "Launch Chrome",
-         "url": "http://localhost:3001/favorites",
+         "name": "Testing",
+         "url": "http://localhost:3001/home",
          "webRoot": "${workspaceFolder}/src"
       }
    ]

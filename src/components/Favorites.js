@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Image, Card, Icon, Button } from 'semantic-ui-react'
 import '../stylesheets/Home_Fav.css'
-import NavBar from './NavBar'
+import NavBar1 from './NavBar'
 
 
 class Favorites extends React.Component {
@@ -63,10 +63,9 @@ class Favorites extends React.Component {
 
 
    render() {
-      const { favCars } = this.props
       return (
          <div id='favPage'>
-            <NavBar />
+            <NavBar1 />
             <img id='banner' src={this.image()} alt='' />
             <h2>{localStorage.username}'s Favorites!</h2>
             <Card.Group itemsPerRow={4} id='cardCont'>
