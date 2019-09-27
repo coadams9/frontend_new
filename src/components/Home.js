@@ -1,8 +1,7 @@
 import React from 'react'
 import NavBar1 from './NavBar'
 import '../stylesheets/Home_Fav.css'
-// import { withRouter } from 'react-router-dom'
-import { Image, Card, Icon, Button } from 'semantic-ui-react'
+import { Image, Card, Icon, Button, Search } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 
@@ -61,6 +60,8 @@ class Home extends React.Component {
       return (
          <div id='homePage'>
             <NavBar1 />
+            <h3>All Available Cars</h3>
+            <Search />
             <img id='banner' src={this.image()} alt='' />
             <Card.Group itemsPerRow={4} id='cardCont'>
                {cars ? this.carCards() : null}
