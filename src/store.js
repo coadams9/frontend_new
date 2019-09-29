@@ -1,12 +1,18 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import thunkMiddleware from 'redux-thunk'
 import carReducer from './reducers/carReducer'
-// import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 const rootReducer = combineReducers({
    cars: carReducer
 })
 
+const middlewares = [thunkMiddleware]
+const middleWareEnhancer = applyMiddleware(...middlewares)
 
-export default createStore(rootReducer, applyMiddleware(thunk))  
+const enhancers = [middleWareEnhancer]
+const composedEnhancers = composeWithDevTools(...enhancers)
+
+
+export default createStore(rootReducer, composedEnhancers)  
