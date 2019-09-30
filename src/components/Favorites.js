@@ -37,6 +37,7 @@ class Favorites extends React.Component {
 
    favCarCards = () => {
       const favsArr = this.props.favCars
+      debugger
       return favsArr.map(car => {
          return <Card key={car.id} >
             <Image src={car.image} />

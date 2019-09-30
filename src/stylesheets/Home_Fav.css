@@ -5,6 +5,20 @@
    height: auto
 }
 
+h3{
+   text-align: center;
+   font-size: xx-large;
+   color: red;
+}
+
+
+/* searchBar */
+.ui.icon.input{  
+   position: relative;
+   left: 44%;
+}
+/* --------------------- */
+
 #favPage{
    background: ghostwhite;
    background-attachment: fixed;

@@ -15,10 +15,10 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route path='/login' component={Login} />
           <Route path='/signUp' component={SignUp} />
           <Route path='/home' component={Home} />
           <Route path='/favorites' component={Favorites} />
+          <Route path='/' component={Login} />
         </Switch>
       </div>
     )
