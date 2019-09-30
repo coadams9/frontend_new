@@ -42,9 +42,10 @@ class Home extends React.Component {
 
    carCards = () => {
       const allCars = this.props.cars
-      let filtered = allCars.filter(car => )
+      const { searchTerm } = this.state
+      let filtered = allCars.filter(car => car.color.toLowerCase().includes(searchTerm.toLowerCase()) || car.make.toLowerCase().includes(searchTerm.toLowerCase()) || car.modelMake.toLowerCase().includes(searchTerm.toLowerCase()) || car.price.toLowerCase().includes(searchTerm.toLowerCase()) || car.year.toLowerCase().includes(searchTerm.toLowerCase()))
 
-      return allCars.map(car => {
+      return filtered.map(car => {
          return <Card key={car.id}>
             <Image src={car.image} />
             <Card.Content>
@@ -72,9 +73,9 @@ class Home extends React.Component {
       return (
          <div id='homePage'>
             <NavBar1 />
+            <img id='banner' src={this.image()} alt='' />
             <h3>All Available Cars</h3>
             <Search onSearchChange={this.handleSearch} />
-            <img id='banner' src={this.image()} alt='' />
             <Card.Group itemsPerRow={4} id='cardCont'>
                {cars ? this.carCards() : null}
             </Card.Group>
