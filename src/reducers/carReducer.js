@@ -16,7 +16,6 @@ const carReducer = (oldState = initialState, action) => {
          return { ...oldState, favs: action.car }
       }
       case 'UPDATEFAV': {
-         debugger
          return update(oldState, {
             allCars: {
                [action.id]: {

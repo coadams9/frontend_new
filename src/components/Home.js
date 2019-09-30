@@ -45,7 +45,6 @@ class Home extends React.Component {
    handleClick = (e, chosenCar) => {
       this.props.favToStore(chosenCar)
       const id = this.props.cars.indexOf(chosenCar)
-      debugger
       this.props.updateFav(id, true)
    }
 
