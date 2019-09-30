@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 class Home extends React.Component {
 
 
-   componentWillMount() {
+   componentDidMount() {
       fetch('http://localhost:3000/api/v1/cars')
          .then(res => res.json())
          .then(data => this.props.carsToStore(data))
