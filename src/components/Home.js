@@ -18,7 +18,10 @@ class Home extends React.Component {
    componentDidMount() {
       fetch('http://localhost:3000/api/v1/cars')
          .then(res => res.json())
-         .then(data => this.props.carsToStore(data))
+         .then(data => {
+            let notfavorited = data.filter(car => car.favorite !== true)
+            this.props.carsToStore(notfavorited)
+         })
 
       fetch('http://localhost:3000/api/v1/cars')
          .then(res => res.json())
@@ -37,6 +40,13 @@ class Home extends React.Component {
       this.setState({
          searchTerm: searchTerm
       })
+   }
+
+   handleClick = (e, chosenCar) => {
+      this.props.favToStore(chosenCar)
+      const id = this.props.cars.indexOf(chosenCar)
+      debugger
+      this.props.updateFav(id, true)
    }
 
 
@@ -59,10 +69,10 @@ class Home extends React.Component {
             <Card.Content>
                <p>Owner: {car.users[0].username}</p>
                <p>Contact: {car.users[0].phoneNum}</p>
-               <Button circular icon size='big' color='red' onClick={() => this.props.favToStore(car)}>
+               <Button circular icon size='big' color='red' onClick={(e) => this.handleClick(e, car)}>
                   <Icon name='heart' />
                   Favorite
-                  </Button>
+               </Button>
             </Card.Content>
          </Card>
       })
@@ -87,7 +97,8 @@ class Home extends React.Component {
 const mapDispatchToProps = (dispatch) => {
    return {
       carsToStore: (data) => dispatch({ type: 'CARS', data }),
-      favToStore: (car) => dispatch({ type: 'FAVS', car })
+      favToStore: (car) => dispatch({ type: 'FAVS', car }),
+      updateFav: (id, bool) => dispatch({ type: 'UPDATEFAV', id, bool })
    }
 }
 
