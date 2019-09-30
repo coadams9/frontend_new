@@ -10,6 +10,10 @@ import { connect } from 'react-redux'
 
 class Home extends React.Component {
 
+   state = {
+      searchTerm: ''
+   }
+
 
    componentDidMount() {
       fetch('http://localhost:3000/api/v1/cars')
@@ -28,10 +32,18 @@ class Home extends React.Component {
       return 'https://i1.wp.com/empiremotorworld.com.my/wp-content/uploads/2017/10/car-banner1.jpg?ssl=1'
    }
 
+   handleSearch = (event) => {
+      let searchTerm = event.target.value
+      this.setState({
+         searchTerm: searchTerm
+      })
+   }
+
 
    carCards = () => {
-      const filtered = this.props.filtered
       const allCars = this.props.cars
+      let filtered = allCars.filter(car => )
+
       return allCars.map(car => {
          return <Card key={car.id}>
             <Image src={car.image} />
@@ -61,7 +73,7 @@ class Home extends React.Component {
          <div id='homePage'>
             <NavBar1 />
             <h3>All Available Cars</h3>
-            <Search />
+            <Search onSearchChange={this.handleSearch} />
             <img id='banner' src={this.image()} alt='' />
             <Card.Group itemsPerRow={4} id='cardCont'>
                {cars ? this.carCards() : null}
@@ -80,8 +92,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
    return {
-      cars: state.cars.allCars,
-      filtered: state.cars.filtered
+      cars: state.cars.allCars
    }
 }
 
