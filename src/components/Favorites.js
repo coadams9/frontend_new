@@ -7,7 +7,7 @@ import NavBar1 from './NavBar'
 
 class Favorites extends React.Component {
 
-   componentWillMount() {
+   componentDidMount() {
       fetch('http://localhost:3000/api/v1/cars')
          .then(res => res.json())
          .then(data => {
@@ -37,28 +37,33 @@ class Favorites extends React.Component {
 
    favCarCards = () => {
       const favsArr = this.props.favCars
-      // debugger
-      return favsArr.map(car => {
-         return <Card key={car.id} >
-            <Image src={car.image} />
-            <Card.Content>
-               <Card.Header>{car.make}</Card.Header>
-               <p>Price: {car.price}</p>
-               <p>Model: {car.modelMake}</p>
-               <p>Year: {car.year}</p>
-               <p>Color: {car.color}</p>
-               <p>Description: {car.description}</p>
-            </Card.Content>
-            <Card.Content>
-               <p>Owner: {car.users[0].username}</p>
-               <p>Contact: {car.users[0].phoneNum}</p>
-               <Button circular icon size='big' color='gray' onClick={() => this.removeCar(car)}>
-                  <Icon name='trash' />
-                  Remove Favorite
+      debugger
+      if (favsArr.length !== 0) {
+         return favsArr.map(car => {
+            return <Card key={car.id} >
+               <Image src={car.image} />
+               <Card.Content>
+                  <Card.Header>{car.make}</Card.Header>
+                  <p>Price: {car.price}</p>
+                  <p>Model: {car.modelMake}</p>
+                  <p>Year: {car.year}</p>
+                  <p>Color: {car.color}</p>
+                  <p>Description: {car.description}</p>
+               </Card.Content>
+               <Card.Content>
+                  <p>Owner: {car.users[0].username}</p>
+                  <p>Contact: {car.users[0].phoneNum}</p>
+                  <Button circular icon size='big' color='gray' onClick={() => this.removeCar(car)}>
+                     <Icon name='trash' />
+                     Remove Favorite
             </Button>
-            </Card.Content>
-         </Card >
-      })
+               </Card.Content>
+            </Card >
+         })
+      } else {
+         alert('No current Favs! Choose some!')
+         this.props.history.push('/home')
+      }
    }
 
 

@@ -52,7 +52,6 @@ class SignUp extends React.Component {
    handleSubmit = (event, { value }) => {
       event.preventDefault()
       const { username, password, passwordConfirm, phoneNum } = this.state
-      debugger
       if (password === passwordConfirm) {
          newUser(username, password, phoneNum)
          this.loginUser()
