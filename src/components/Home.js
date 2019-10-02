@@ -3,6 +3,7 @@ import NavBar1 from './NavBar'
 import '../stylesheets/Home_Fav.css'
 import { Image, Card, Icon, Button, Search } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 
 
@@ -19,16 +20,16 @@ class Home extends React.Component {
       fetch('http://localhost:3000/api/v1/cars')
          .then(res => res.json())
          .then(data => {
-            let notfavorited = data.filter(car => car.favorite !== true)
+            let notfavorited = data.filter(car => car.favorite == false)
             this.props.carsToStore(notfavorited)
          })
 
-      fetch('http://localhost:3000/api/v1/cars')
-         .then(res => res.json())
-         .then(data => {
-            let car = data.filter(car => car.favorite === true)
-            this.props.favToStore(car)
-         })
+      // fetch('http://localhost:3000/api/v1/cars')
+      //    .then(res => res.json())
+      //    .then(data => {
+      //       let car = data.filter(car => car.favorite === true)
+      //       this.props.favToStore(car)
+      //    })
    }
 
    image() {
@@ -45,7 +46,6 @@ class Home extends React.Component {
    handleClick = (e, chosenCar) => {
       this.props.favToStore(chosenCar)
       const id = this.props.cars.indexOf(chosenCar)
-      debugger
       this.props.updateFav(id, true)
    }
 
@@ -69,16 +69,25 @@ class Home extends React.Component {
             <Card.Content>
                <p>Owner: {car.users[0].username}</p>
                <p>Contact: {car.users[0].phoneNum}</p>
-               <Button circular icon size='big' color='red' onClick={(e) => this.handleClick(e, car)}>
-                  <Icon name='heart' />
-                  Favorite
-               </Button>
+               {car.favorite !== true ?
+                  <Button circular icon size='big' color='red' onClick={(e) => this.handleClick(e, car)}>
+                     <Icon name='heart' />
+                     Favorite
+                  </Button>
+                  :
+                  <Button circular icon size='big' color='grey'>
+                     <Icon name='heart' />
+                     In Your Favs!
+                     <Link to='/favorites'>View Favs</Link>
+                  </Button>
+               }
             </Card.Content>
          </Card>
       })
    }
 
    render() {
+      console.log('rendered')
       const { cars } = this.props
       return (
          <div id='homePage'>
