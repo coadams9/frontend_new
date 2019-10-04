@@ -7,37 +7,18 @@ import NavBar1 from './NavBar'
 
 class Favorites extends React.Component {
 
-   componentDidMount() {
-      fetch('http://localhost:3000/api/v1/cars')
-         .then(res => res.json())
-         .then(data => {
-            let favCars = data.filter(car => car.favorite === true)
-            this.props.favToStore(favCars)
-         })
-   }
-
 
    image() {
       return 'https://i1.wp.com/empiremotorworld.com.my/wp-content/uploads/2017/10/car-banner1.jpg?ssl=1'
    }
 
    removeCar = (car) => {
-      fetch(`http://localhost:3000/api/v1/cars/${car.id}`, {
-         method: 'PATCH',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         body: JSON.stringify({
-            favorite: false
-         })
-      })
-      document.location.reload(true)
+      this.props.removeCar(car)
    }
 
 
    favCarCards = () => {
       const favsArr = this.props.favCars
-      debugger
       if (favsArr.length !== 0) {
          return favsArr.map(car => {
             return <Card key={car.id} >
@@ -53,7 +34,7 @@ class Favorites extends React.Component {
                <Card.Content>
                   <p>Owner: {car.users[0].username}</p>
                   <p>Contact: {car.users[0].phoneNum}</p>
-                  <Button circular icon size='big' color='gray' onClick={() => this.removeCar(car)}>
+                  <Button circular icon size='big' color='grey' onClick={() => this.removeCar(car)}>
                      <Icon name='trash' />
                      Remove Favorite
             </Button>
@@ -92,8 +73,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
    return {
       carsToStore: (data) => dispatch({ type: 'CARS', data }),
-      favToStore: (car) => dispatch({ type: 'FAVS', car })
-      // removeCar: (car) => dispatch({ type: 'RMV', car })
+      removeCar: (car) => dispatch({ type: 'RMVFAV', car })
    }
 }
 

@@ -19,10 +19,11 @@ class NavBar extends React.Component {
          <Menu size='massive' color='black' inverted>
             <Menu.Item name='home' as={Link} to='/home' />
             <Menu.Item name='favorites' as={Link} to='/favorites' />
+            <Menu.Item name='add a car' as={Link} to='/addcar' />
             <Menu.Menu position='right'>
                <Menu.Item name='logout' position='right' onClick={this.logout} />
             </Menu.Menu>
-         </Menu>
+         </Menu >
       )
    }
 }

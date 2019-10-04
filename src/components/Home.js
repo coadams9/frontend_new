@@ -20,7 +20,7 @@ class Home extends React.Component {
       fetch('http://localhost:3000/api/v1/cars')
          .then(res => res.json())
          .then(data => {
-            let notfavorited = data.filter(car => car.favorite == false)
+            let notfavorited = data.filter(car => car.favorite === false)
             this.props.carsToStore(notfavorited)
          })
 
