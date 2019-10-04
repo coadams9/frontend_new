@@ -55,9 +55,10 @@ class Home extends React.Component {
       const { searchTerm } = this.state
       let filtered = allCars.filter(car => car.color.toLowerCase().includes(searchTerm.toLowerCase()) || car.make.toLowerCase().includes(searchTerm.toLowerCase()) || car.modelMake.toLowerCase().includes(searchTerm.toLowerCase()) || car.price.toLowerCase().includes(searchTerm.toLowerCase()) || car.year.toLowerCase().includes(searchTerm.toLowerCase()))
 
+
       return filtered.map(car => {
          return <Card key={car.id}>
-            <Image src={car.image} />
+            <Image src={car.image} alt='Your Pic could not be Loaded. Please try another picture. :)' />
             <Card.Content>
                <Card.Header>{car.make}</Card.Header>
                <p>Price: {car.price}</p>

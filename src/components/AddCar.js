@@ -7,28 +7,28 @@ import '../stylesheets/addCar.css'
 
 class AddCar extends React.Component {
 
-    // state = {
-    //     make: 'Make',
-    //     modelMake: 'Model',
-    //     year: 'Year',
-    //     color: 'Color',
-    //     image: 'Please Post URL',
-    //     price: 'Price',
-    //     description: 'Tell others about your car...',
-    //     favorite: false
-    // }
+    state = {
+        make: 'Make',
+        modelMake: 'Model',
+        year: 'Year',
+        color: 'Color',
+        image: 'Please Post URL',
+        price: 'Price',
+        description: 'Tell others about your car...',
+        favorite: false
+    }
 
-    // handleSubmit = () => {
-    //     event.preventDefault()
-    //     fetch('localhost3000:/api/v1/cars', {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Access-Token': localStorage.getItem('token')
-    //         },
-    //         method: 'POST',
-    //         body: JSON.stringify(this.state)
-    //     })
-    // }
+    handleSubmit = (event) => {
+        event.preventDefault()
+        fetch('http://localhost:3000/api/v1/cars', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Token': localStorage.getItem('token')
+            },
+            method: 'POST',
+            body: JSON.stringify(this.state)
+        })
+    }
 
     handleChange = (event) => {
         this.setState({
