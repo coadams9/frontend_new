@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { Form } from 'semantic-ui-react'
 import '../stylesheets/addCar.css'
@@ -7,59 +7,126 @@ import NavBar1 from './NavBar'
 
 
 
-class AddCar extends React.Component {
+const AddCar = (props) => {
 
-    state = {
-        make: 'Make',
-        modelMake: 'Model',
-        year: 'Year',
-        color: 'Color',
-        image: 'Please Post URL',
-        price: 'Price',
-        description: 'Tell others about your car...',
+    const [state, setState] = useState({
+        make: '',
+        modelMake: '',
+        year: '',
+        color: '',
+        image: '',
+        price: '',
+        description: '',
         favorite: false
+    })
+
+    const [errorState, setErrorState] = useState({
+        makeError: '',
+        modelError: '',
+        yearError: '',
+        colorError: '',
+        imageError: '',
+        priceError: '',
+        descriptionError: ''
+    })
+
+    const validate = () => {
+        // debugger
+        let isError = false
+        const errors = {
+            makeError: '',
+            modelError: '',
+            yearError: '',
+            colorError: '',
+            imageError: '',
+            priceError: '',
+            descriptionError: ''
+        }
+
+        if (!state.make) {
+            isError = true
+            errors.makeError = 'Please enter Car Make'
+        }
+        if (!state.modelMake) {
+            isError = true
+            errors.modelError = 'Please enter Car Model'
+        }
+        if (!state.year) {
+            isError = true
+            errors.yearError = 'Please enter Car Year'
+        }
+        if (!state.color) {
+            isError = true
+            errors.colorError = 'Please enter Car Color'
+        }
+        if (!state.image) {
+            isError = true
+            errors.imageError = 'Please enter Car Image URL'
+        }
+        if (!state.price) {
+            isError = true
+            errors.priceError = 'Please enter Car Price'
+        }
+        if (!state.description) {
+            isError = true
+            errors.descriptionError = 'Please enter Car Description'
+        }
+
+        setErrorState({ ...errorState, ...errors })
+
+        return isError
     }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
-        fetch('http://localhost:3000/api/v1/cars', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Token': localStorage.getItem('token')
-            },
-            method: 'POST',
-            body: JSON.stringify(this.state)
-        })
+        const err = validate()
+        if (!err) {
+            fetch('http://localhost:3000/api/v1/cars', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Token': localStorage.getItem('token')
+                },
+                method: 'POST',
+                body: JSON.stringify(state)
+            })
+            alert('Your car has been added successfully! Redirecting to Home Page!')
+            props.history.push('/home')
+        }
     }
 
-    handleChange = (event) => {
-        this.setState({
+
+    const handleChange = (event) => {
+        setState({
+            ...state,
             [event.target.name]: event.target.value
         })
     }
 
-    render() {
-        const { make, modelMake, year, color, image, price, description } = this.state
-        return (
-            <div>
-                <NavBar1 />
-                <Form onSubmit={this.handleSubmit} id='addCarForm' inverted={true}>
-                    <Form.Input id='input' name='make' fluid label='Car Make' onChange={this.handleChange} value={make} />
-                    <Form.Input id='input' name='modelMake' fluid label='Car Model' onChange={this.handleChange} value={modelMake} />
-                    <Form.Input id='input' name='year' fluid label='Car Year' onChange={this.handleChange} value={year} />
-                    <Form.Input id='input' name='color' fluid label='Car Color' onChange={this.handleChange} value={color} />
-                    <Form.Input id='input' name='image' fluid label='Car Image' onChange={this.handleChange} value={image} />
-                    <Form.Input id='input' name='price' fluid label='Car Price' onChange={this.handleChange} value={price} />
-                    <Form.TextArea label='Car Description' name='description' onChange={this.handleChange} value={description} />
-                    <Form.Button>Submit</Form.Button>
-                </Form>
-            </div>
-        )
-    }
 
+    const { make, modelMake, year, color, image, price, description } = state
 
-
-
+    return (
+        <div>
+            <NavBar1 />
+            <Form onSubmit={handleSubmit} id='addCarForm' inverted={true} >
+                <Form.Input id='input' name='make' fluid label='Car Make' onChange={handleChange} value={make} placeholder='Make' />
+                <div style={{ color: 'red', background: 'white' }}>{errorState.makeError}</div>
+                <Form.Input id='input' name='modelMake' fluid label='Car Model' onChange={handleChange} value={modelMake} placeholder='Model' />
+                <div style={{ color: 'red', background: 'white' }}>{errorState.modelError}</div>
+                <Form.Input id='input' name='year' type='number' fluid label='Car Year' onChange={handleChange} value={year} placeholder='Year' />
+                <div style={{ color: 'red', background: 'white' }}>{errorState.yearError}</div>
+                <Form.Input id='input' name='color' fluid label='Car Color' onChange={handleChange} value={color} placeholder='Color' />
+                <div style={{ color: 'red', background: 'white' }}>{errorState.colorError}</div>
+                <Form.Input id='input' name='image' type='url' fluid label='Car Image' onChange={handleChange} value={image} placeholder='Please Enter URL' />
+                <div style={{ color: 'red', background: 'white' }}>{errorState.imageError}</div>
+                <Form.Input id='input' name='price' fluid label='Car Price' onChange={handleChange} value={price} placeholder='Price' />
+                <div style={{ color: 'red', background: 'white' }}>{errorState.priceError}</div>
+                <Form.TextArea label='Car Description' name='description' onChange={handleChange} value={description} placeholder='Tell us about your Car...' />
+                <div style={{ color: 'red', background: 'white' }}>{errorState.descriptionError}</div>
+                <Form.Button>Submit</Form.Button>
+            </Form>
+        </div>
+    )
 }
 
 

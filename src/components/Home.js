@@ -23,13 +23,6 @@ class Home extends React.Component {
             let notfavorited = data.filter(car => car.favorite === false)
             this.props.carsToStore(notfavorited)
          })
-
-      // fetch('http://localhost:3000/api/v1/cars')
-      //    .then(res => res.json())
-      //    .then(data => {
-      //       let car = data.filter(car => car.favorite === true)
-      //       this.props.favToStore(car)
-      //    })
    }
 
    image() {
@@ -95,7 +88,7 @@ class Home extends React.Component {
             <NavBar1 />
             <img id='banner' src={this.image()} alt='' />
             <h3>All Available Cars</h3>
-            <Search onSearchChange={this.handleSearch} />
+            <Search onSearchChange={this.handleSearch} showNoResults={false} />
             <Card.Group itemsPerRow={4} id='cardCont'>
                {cars ? this.carCards() : null}
             </Card.Group>
