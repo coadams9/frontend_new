@@ -14,7 +14,7 @@ class Home extends React.Component {
 
 
    componentDidMount() {
-      fetch('https://cbaybackend.herokuapp.com//cars')
+      fetch('http://cbaybackend.herokuapp.com/cars')
          .then(res => res.json())
          .then(data => {
             let notfavorited = data.filter(car => car.favorite === false)

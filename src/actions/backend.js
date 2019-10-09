@@ -1,14 +1,18 @@
-const API = 'https://cbaybackend.herokuapp.com'
+const API = 'http://cbaybackend.herokuapp.com'
 
 
 export function getAuthToken(loginInfo) {
+   // debugger
    return fetch(`${API}/login`, {
       method: 'POST',
       headers: {
          'Content-Type': 'application/json'
       },
       body: JSON.stringify(loginInfo)
-   }).then(res => res.json())
+   }).then(res => {
+      debugger
+      res.json()
+   })
 }
 
 export function newUser(username, password, phoneNum) {
