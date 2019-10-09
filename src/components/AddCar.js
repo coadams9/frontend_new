@@ -81,7 +81,7 @@ const AddCar = (props) => {
         event.preventDefault()
         const err = validate()
         if (!err) {
-            fetch('https://localhost:3000/cars', {
+            fetch('http://localhost:3000/cars', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Token': localStorage.getItem('token')
