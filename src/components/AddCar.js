@@ -81,7 +81,7 @@ const AddCar = (props) => {
         event.preventDefault()
         const err = validate()
         if (!err) {
-            fetch('https://cbaybackend.herokuapp.com/cars', {
+            fetch('https://localhost:3000/cars', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Token': localStorage.getItem('token')

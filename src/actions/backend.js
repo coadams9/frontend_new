@@ -1,4 +1,4 @@
-const API = 'https://cbaybackend.herokuapp.com'
+const API = 'https://localhost:3000'
 
 
 export function getAuthToken(loginInfo) {
@@ -10,7 +10,7 @@ export function getAuthToken(loginInfo) {
       },
       body: JSON.stringify(loginInfo)
    }).then(res => {
-      debugger
+      // debugger
       res.json()
    })
 }
