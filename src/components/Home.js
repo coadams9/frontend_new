@@ -14,7 +14,7 @@ class Home extends React.Component {
 
 
    componentDidMount() {
-      fetch('http://localhost:3000/cars')
+      fetch('http://localhost:3000/api/v1/cars')
          .then(res => res.json())
          .then(data => {
             let notfavorited = data.filter(car => car.favorite === false)
