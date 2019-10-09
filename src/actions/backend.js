@@ -1,4 +1,4 @@
-const API = 'http://cbaybackend.herokuapp.com'
+const API = 'https://cbaybackend.herokuapp.com'
 
 
 export function getAuthToken(loginInfo) {
