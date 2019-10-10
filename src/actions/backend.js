@@ -2,7 +2,7 @@ const API = 'http://localhost:3000/api/v1'
 
 
 export function getAuthToken(loginInfo) {
-   // debugger
+   debugger
    return fetch(`${API}/login`, {
       method: 'POST',
       headers: {
